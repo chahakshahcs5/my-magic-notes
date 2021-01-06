@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> <%= pageTitle %> </title>
+    <!-- CSS only -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css"
+      integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK"
+      crossorigin="anonymous"
+    />
+    <% if(path==='/index'){ %>
+      <link rel="stylesheet" href="/index-style.css">
+    <% } else if(path==='/login'){ %>
+      <link rel="stylesheet" href="/login-style.css">
+    <% } else if(path==='/register'){ %>
+      <link rel="stylesheet" href="/register-style.css">
+    <% } else if(path=== '/home/user'){ %>
+      <link rel="stylesheet" href="/home-style.css">
+    <% } else if(path==='/reset-password'){ %>
+      <link rel="stylesheet" href="/resetPassword-style.css">
+    <% } else if(path==='/update-password'){ %>
+      <link rel="stylesheet" href="/updatePassword-style.css">
+    <% } %>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">Magic Notes</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+            <% if(!isLoggedin) { %>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/login">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/register">Register</a>
+              </li>
+            <% } %>
+            <% if(isLoggedin) { %>
+              <form action="/logout" method="POST">
+                <li class="nav-item">
+                  <button class="btn btn-warning" type="submit" style="margin-left: 40px;">Logout</button>
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                </li>
+              </form>
+            <% } %>
+           
+          </ul>
+          <form class="d-flex">
+            <input
+              class="form-control mr-2"
+              type="search"
+              id="search"
+              placeholder="Find notes"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-success" id="searchEventHandler" type="submit">
+              Search
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>

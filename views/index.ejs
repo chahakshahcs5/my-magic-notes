@@ -1,0 +1,30 @@
+<%- include('includes/navigation.ejs') %>
+<% if (errorMessage) { %>
+    <div class="error">
+      <%= errorMessage %>
+    </div>
+  <% } %>
+
+<div class="container">
+    <h2>Welcome to Magic Notes</h2>
+    <img src="notes.jpg" alt="">
+    <h4>Login or Register to get started!</h4>
+    <div class="div">
+        <form action="/login" method="POST">
+            <button class="btn left btn-dark" type="submit">
+                Login
+            </button>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        </form>
+        <form action="/register" method="POST">
+            <button class="btn right btn-dark" type="submit">
+                Register
+            </button>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        </form>
+        
+    </div>
+    
+</div>
+
+<%- include('includes/end.ejs') %>

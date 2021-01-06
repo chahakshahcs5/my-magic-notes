@@ -1,0 +1,39 @@
+<%- include('includes/navigation.ejs') %>
+<% if (errorMessage) { %>
+  <div class="error">
+    <%= errorMessage %>
+  </div>
+<% } %>
+<div class="container register">
+    <form class="form" action="/add-user" method="POST">
+        <div class="row mb-3">
+          <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputName" name="name" required>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+          <div class="col-sm-10">
+            <input type="email" class="form-control" id="inputEmail3" name="email" required>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+          <div class="col-sm-10">
+            <input type="password" class="form-control" id="inputPassword3" name="password" required>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="inputPassword2" class="col-sm-2 col-form-label">Confirm Password</label>
+          <div class="col-sm-10">
+            <input type="password" class="form-control" id="inputPassword2" name="confirmPassword" required>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+      </form>
+</div>
+
+
+<%- include('includes/end.ejs') %>

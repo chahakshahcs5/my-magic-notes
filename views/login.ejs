@@ -1,0 +1,35 @@
+<%- include('includes/navigation.ejs') %>
+<% if (errorMessage) { %>
+  <div class="error" style="
+  text-align: center;
+  background-color: rgb(241, 156, 156);
+  width: 400px;
+  margin: auto;
+  margin-top: 20px;
+  height: 30px;
+">
+    <%= errorMessage %>
+  </div>
+<% } %>
+<div class="container login">
+    <form class="form" action="/user-login" method="POST">
+        <div class="row mb-3">
+          <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+          <div class="col-sm-10">
+            <input type="email" class="form-control" id="inputEmail3" name="email" required>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+          <div class="col-sm-10">
+            <input type="password" class="form-control" id="inputPassword3" name="password" required>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          </div>
+        </div>
+        <button type="submit" id="btn" class="btn btn-primary">Log in</button>
+        <a href="/reset-password">Reset Password</a>
+      </form>
+</div>
+
+
+<%- include('includes/end.ejs') %>

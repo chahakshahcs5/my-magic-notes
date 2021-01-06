@@ -1,0 +1,20 @@
+.form {
+    margin-top: 50px;
+    padding: 20px;
+}
+
+.register {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.5);
+    width: 1000px;
+    height: 350px;
+    background-color: rgb(205, 234, 248);
+}
+
+.error {
+    text-align: center;
+    background-color: rgb(241, 156, 156);
+    width: 400px;
+    margin: auto;
+    margin-top: 20px;
+    height: 30px;
+}

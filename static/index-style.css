@@ -1,0 +1,36 @@
+.container {
+    margin-top: 100px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.5);
+    width: 500px;
+    height: 300px;
+    background-color: rgb(205, 234, 248);
+}
+
+img {
+    height: 50px;
+    width: 50px;
+}
+
+.container h2{
+    margin-top: 150px;
+    padding-top: 10px;
+    display: inline;
+}
+
+.left, .right {
+    margin-left: 100px;
+    margin-top: 150px;
+}
+
+form {
+    display: inline;
+}
+
+.error {
+    text-align: center;
+    background-color: rgb(241, 156, 156);
+    width: 400px;
+    margin: auto;
+    margin-top: 20px;
+    height: 30px;
+}
