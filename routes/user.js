@@ -111,7 +111,7 @@ router.post("/reset", (req,res) => {
           to: email,
           from: 'magicnotes@telegmail.com',
           subject: 'Reset Password',
-          html: `<h1>You requsted for a password reset <a href="http://localhost:3000/reset/${token}">Click here</a> to reset password</h1>`
+          html: `<h1>You requsted for a password reset <a href="http://my-magic-notes/reset/${token}.herokuapp.com">Click here</a> to reset password</h1>`
         })
       })
       .catch(err => {
@@ -125,7 +125,6 @@ router.post("/update-password", (req,res) => {
   const newPassword = req.body.newPassword;
   const confirmPassword = req.body.confirmPassword;
   let resetUser;
-  console.log(token);
   if(newPassword == confirmPassword){
     User.findOne({
       resetToken: token, resetTokenExpiration: {$gt: Date.now()}
@@ -153,7 +152,6 @@ router.post("/update-password", (req,res) => {
   } else {
     res.redirect(`/reset/${token}`)
     req.flash('data', 'password does not match')
-    console.log(token);
   }
   
 });
@@ -166,7 +164,6 @@ router.get('/reset/:token', (req,res) => {
     message = null;
   }
   const token = req.params.token;
-  console.log(token);
   User.findOne({
     resetToken: token, resetTokenExpiration: {$gt: Date.now()}
   })
@@ -218,7 +215,7 @@ router.post("/add-user", (req, res) => {
                   to: email,
                   from: 'magicnotes@telegmail.com',
                   subject: 'Signup',
-                  html: `<h1>You Successfully Signed Up! <a href="http://localhost:3000/login">Click here</a> to log in</h1>`
+                  html: `<h1>You Successfully Signed Up! <a href="http://my-magic-notes/login.herokuapp.com">Click here</a> to log in</h1>`
                 })
                 .catch(err => {
                   console.log(err);
@@ -251,7 +248,6 @@ router.post("/user-login", (req, res) => {
           .then((doMatch) => {
             if (doMatch) {
               const user_id = user._id;
-              console.log(user);
               req.session.isLoggedin = true;
               res.redirect(`home/${user_id}`);
             } else {

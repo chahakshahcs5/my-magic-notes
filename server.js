@@ -1,6 +1,10 @@
 const indexRouter = require('./routes/index');
 const userRouter = require('./routes/user');
 
+const fs = require('fs');
+
+const path = require('path');
+
 const dotenv = require('dotenv');
 
 dotenv.config({path: './config/config.env'});
@@ -15,12 +19,18 @@ const session = require('express-session');
 
 const MongoDBStore = require('connect-mongodb-session')(session);
 
+const helmet = require('helmet');
+
+const compression = require('compression');
+
+const morgan = require('morgan');
+
 const csrf = require('csurf');
 
 const flash = require('connect-flash');
 
 const store = new MongoDBStore({
-    uri: 'mongodb+srv://rajshahcs5:@9998866406@c2310.dahq9.mongodb.net/magicnote?retryWrites=true&w=majority',
+    uri: process.env.MONGO_URI,
     collection: 'sessions'
 });
 
@@ -38,12 +48,23 @@ app.use(session({secret: 'chahak', store: store, resave: true, saveUninitialized
 
 const csrfProtection = csrf();
 
+const accessLogStream = fs.createWriteStream(
+    path.join(__dirname, 'access.log'), 
+    { flags: 'a'}
+    );
+    
 app.use(csrfProtection);
 
 app.use((req,res,next) => {
     res.locals.csrfToken = req.csrfToken();
     next();
 });
+
+app.use(helmet());
+
+app.use(compression());
+
+app.use(morgan('combined', { stream: accessLogStream}));
 
 app.use(flash());
 
